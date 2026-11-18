@@ -1,0 +1,201 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"/>
+<meta name="color-scheme" content="light dark"/>
+<link rel="icon" href="data:,"/>
+<title>Teen Parent Dashboard</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,600;6..72,700&family=Public+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#f7f6f2; --surface:#ffffff; --surface2:#eef2ef; --ink:#1a2220; --muted:#5b6b66; --line:#dde3df;
+  --teal:#0f766e; --teal-dark:#0b5e57; --amber:#b45309; --amber-bg:#fef3c7; --coral:#9a3412; --coral-bg:#ffedd5;
+  --chip:#e6ede9; --radius:16px;
+}
+@media (prefers-color-scheme: dark){
+  :root{ --bg:#121816; --surface:#1a2320; --surface2:#222e2a; --ink:#eef2f0; --muted:#9fb0aa; --line:#2e3d38; --teal:#2dd4bf; --teal-dark:#5eead4; --amber:#fbbf24; --amber-bg:#3a2f0a; --coral:#fdba74; --coral-bg:#3b210f; --chip:#24332e; }
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:"Public Sans",system-ui,sans-serif;line-height:1.55}
+a{color:var(--teal);text-decoration:none} a:hover{text-decoration:underline}
+button,input{font:inherit}
+.wrap{max-width:1180px;margin:0 auto;padding:0 18px 48px}
+.samplebar{background:#111827;color:#fde68a;padding:10px 18px;text-align:center;font-size:13px;font-weight:600;letter-spacing:.02em}
+.samplebar strong{background:#f59e0b;color:#111827;padding:2px 7px;border-radius:999px;font-size:11px;letter-spacing:.06em;margin-right:8px}
+header{padding:28px 0 10px}
+h1{font-family:"Newsreader",serif;font-size:clamp(32px,5vw,52px);line-height:.95;margin:0;letter-spacing:-.02em;max-width:720px}
+h1 em{font-style:italic;color:var(--teal)}
+.lede{color:var(--muted);font-size:17px;max-width:640px;margin:14px 0 0}
+.meta{display:flex;flex-wrap:wrap;gap:10px;margin-top:18px}
+.meta span{background:var(--surface);border:1px solid var(--line);border-radius:999px;padding:7px 12px;font-size:13px}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin:22px 0}
+.stat{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:16px}
+.stat b{font-family:"Newsreader",serif;font-size:32px;line-height:1;display:block}
+.stat label{font-size:12px;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);font-weight:700}
+.filters{display:flex;flex-wrap:wrap;gap:8px;margin:8px 0 18px}
+.filters button{min-height:40px;padding:8px 16px;border-radius:999px;border:1px solid var(--line);background:var(--surface);cursor:pointer;font-weight:600;font-size:14px}
+.filters button.active{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.grid{display:grid;grid-template-columns:1.9fr .95fr;gap:18px;align-items:start}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:20px;padding:20px}
+.card h2{font-family:"Newsreader",serif;font-size:24px;margin:0 0 4px;line-height:1.1}
+.card p.sub{color:var(--muted);margin:0 0 16px;font-size:14px}
+.brief{border-top:1px solid var(--line);padding:18px 0}
+.brief:first-of-type{border-top:none;padding-top:4px}
+.brief-top{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;align-items:center}
+.badge{font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;padding:4px 8px;border-radius:999px;background:var(--chip)}
+.badge.sample{background:var(--amber-bg);color:var(--amber)}
+.brief h3{margin:8px 0 6px;font-size:18px;line-height:1.3}
+.brief p{margin:0;color:var(--muted);font-size:14.5px}
+.solution{margin-top:12px;background:var(--surface2);border-radius:12px;padding:14px}
+.solution label{font-size:11px;letter-spacing:.07em;text-transform:uppercase;font-weight:700;color:var(--teal)}
+.solution p{color:var(--ink);margin:4px 0 0}
+.votes{font-size:13px;color:var(--muted);white-space:nowrap}
+.side-stack{display:grid;gap:18px}
+.mirror-item{padding:12px 0;border-top:1px solid var(--line)}
+.mirror-item:first-of-type{border-top:none}
+.mirror-item b{display:block;font-size:15px}
+.mirror-item p{margin:4px 0 0;color:var(--muted);font-size:14px}
+.radar-item{display:flex;gap:12px;padding:12px 0;border-top:1px solid var(--line)}
+.radar-item:first-of-type{border-top:none}
+.dot{width:10px;height:10px;border-radius:50%;background:#f59e0b;margin-top:6px;flex-shrink:0}
+.dot.high{background:#dc2626}
+.searchrow{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:14px}
+.searchrow input{flex:1;min-width:220px;min-height:44px;padding:10px 14px;border-radius:999px;border:1px solid var(--line);background:var(--bg);color:var(--ink)}
+.library{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.lib{background:var(--surface2);border-radius:14px;padding:16px}
+.lib h4{margin:0 0 6px;font-size:15px;line-height:1.35}
+.lib p{margin:0;color:var(--muted);font-size:14px}
+.lib footer{margin-top:10px;font-size:12px;color:var(--muted);display:flex;justify-content:space-between}
+.crisis{margin-top:18px;background:#7f1d1d;color:#fff;border-radius:20px;padding:22px;display:grid;grid-template-columns:1.2fr .8fr;gap:18px}
+@media (prefers-color-scheme: dark){.crisis{background:#450a0a}}
+.crisis h2{color:#fff;margin:0}
+.crisis p{color:#fecaca}
+.crisis a{color:#fff;text-decoration:underline;font-weight:700}
+.crisis-box{background:rgba(255,255,255,.12);border-radius:14px;padding:16px}
+.foot{color:var(--muted);font-size:13px;margin-top:20px;line-height:1.6}
+.empty{padding:28px;text-align:center;color:var(--muted);border:1px dashed var(--line);border-radius:14px;display:none}
+@media(max-width:860px){.grid{grid-template-columns:1fr}.stats{grid-template-columns:1fr 1fr}.library{grid-template-columns:1fr}.crisis{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<div class="samplebar"><strong>SAMPLE DATA</strong> Preview only — example posts, not live Reddit data. Live feed needs Reddit API access.</div>
+<div class="wrap">
+<header>
+<h1>What parents of teens are <em>actually</em> talking about today</h1>
+<p class="lede">A daily synthesis from r/Parenting, r/parentingteenagers and r/teenagers — rising concerns, the most-upvoted advice that followed, and what teens are saying on their side. Read-only, anonymised, always linked back.</p>
+<div class="meta"><span>📅 Sample snapshot · Tue, Nov 17, 2026</span><span>Sources: 3 subreddits (sample)</span><span>Not medical advice — community experience only</span></div>
+<div class="stats">
+<div class="stat"><b>1,284</b><label>Threads scanned*</label></div>
+<div class="stat"><b>9</b><label>Rising concerns</label></div>
+<div class="stat"><b>42</b><label>“What worked” reports</label></div>
+<div class="stat"><b>3</b><label>Early warnings</label></div>
+</div>
+<p style="font-size:12px;color:var(--muted);margin:-10px 0 0">* Sample counts for layout. Real counts will appear when live data is connected.</p>
+</header>
+
+<div class="filters" id="filters" role="group" aria-label="Filter by topic">
+<button class="active" data-filter="all">All topics</button>
+<button data-filter="screens">📱 Screens &amp; phones</button>
+<button data-filter="school">🎒 School</button>
+<button data-filter="anxiety">🧠 Anxiety &amp; mood</button>
+<button data-filter="sleep">🌙 Sleep</button>
+<button data-filter="friends">👥 Friends &amp; social</button>
+<button data-filter="independence">🚗 Independence</button>
+</div>
+
+<div class="grid">
+<section class="card" aria-labelledby="brief-h">
+<h2 id="brief-h">Today’s brief — rising concerns &amp; top solutions</h2>
+<p class="sub">Each concern is in parents’ own words (paraphrased in this sample). The solution shown is the highest-upvoted reply in that thread.</p>
+<div id="briefList"></div>
+<div class="empty" id="briefEmpty">No sample posts for this topic yet. Try another filter — in the live version this fills from the day’s threads.</div>
+</section>
+
+<aside class="side-stack">
+<section class="card">
+<h2>Teen-side mirror</h2>
+<p class="sub">What teens are posting about this week in r/teenagers — summarised, never quoted with usernames.</p>
+<div class="mirror-item"><b>“Everyone’s exhausted by November”</b><p>Sample trend: sleep debt + early college deadlines dominate. Many teens say they’re not lazy — they’re tired and anxious about grades slipping.</p></div>
+<div class="mirror-item"><b>Group chats as social pressure</b><p>Sample trend: being left on “read”, screenshots shared out of context, and pressure to reply instantly come up repeatedly.</p></div>
+<div class="mirror-item"><b>Wanting space, not distance</b><p>Sample trend: teens asking how to tell parents they need alone time after school without it turning into an argument.</p></div>
+<p style="font-size:13px"><a href="https://www.reddit.com/r/teenagers/" target="_blank" rel="noopener">Browse r/teenagers →</a> &nbsp;·&nbsp; <a href="https://www.reddit.com/r/Parenting/" target="_blank" rel="noopener">r/Parenting →</a></p>
+</section>
+
+<section class="card">
+<h2>Early-warning radar</h2>
+<p class="sub">Terms spiking in teen subs before they hit the news. Sample flags only.</p>
+<div class="radar-item"><span class="dot high"></span><div><b style="font-size:15px">“Sleepmaxxing” challenges</b><p style="margin:2px 0 0;color:var(--muted);font-size:14px">Sample: extreme sleep hacks circulating on short-video apps. Worth a calm conversation, not a ban-first reaction.</p></div></div>
+<div class="radar-item"><span class="dot"></span><div><b style="font-size:15px">AI homework helpers — new names</b><p style="margin:2px 0 0;color:var(--muted);font-size:14px">Sample: two new tools mentioned 3× more this week. Check your school’s policy together.</p></div></div>
+<div class="radar-item"><span class="dot"></span><div><b style="font-size:15px">Vaping in school bathrooms — again</b><p style="margin:2px 0 0;color:var(--muted);font-size:14px">Sample: renewed chatter after a quiet month, mostly in parent threads.</p></div></div>
+</section>
+
+<section class="card" style="background:var(--amber-bg);border-color:transparent">
+<h2 style="font-size:20px">How live data will work</h2>
+<p style="font-size:14px;color:var(--ink)">When Reddit API access is sorted, this same layout fills automatically each morning. Nothing here posts, votes, or identifies anyone — it only reads public threads and links back to them. Posts flagged for self-harm are never shown as content.</p>
+</section>
+</aside>
+</div>
+
+<section class="card" style="margin-top:18px">
+<h2>Search the “what worked” library</h2>
+<p class="sub">Past situations where a parent reported back on what helped. Try “won’t go to school”, “phone at night”, or “panic”.</p>
+<div class="searchrow"><input id="search" type="search" placeholder="Search sample library… e.g. school refusal, phone, anxiety" aria-label="Search what worked library"/><button id="clearSearch" style="min-height:44px;padding:0 18px;border-radius:999px;border:1px solid var(--line);background:var(--surface);cursor:pointer;font-weight:600">Clear</button></div>
+<div class="library" id="library"></div>
+<div class="empty" id="libEmpty">No sample matches. Try a shorter word like “sleep” or “phone”.</div>
+</section>
+
+<section class="crisis" aria-labelledby="crisis-h">
+<div><h2 id="crisis-h">If a post — or your teen — sounds in crisis</h2><p>This dashboard never gives automated advice on self-harm posts. Those threads are excluded from the brief and routed only to help. If your family needs support right now, please reach out directly:</p></div>
+<div class="crisis-box"><p style="margin:0 0 8px"><strong>Call or text 988</strong> — Suicide and Crisis Lifeline (US, 24/7)</p><p style="margin:0 0 8px"><strong>Text HOME to 741741</strong> — Crisis Text Line</p><p style="margin:0">If there is immediate danger, call <strong>911</strong>.</p></div>
+</section>
+
+<p class="foot"><strong>About this preview:</strong> Built at your request with clearly-labelled sample data because Reddit’s public RSS and JSON routes are currently blocked and new Data API access may be closed after Oct 31, 2026. Reddit is US-skewed, English-speaking and self-selected — treat every “solution” as one family’s anecdote, not guidance. In the live version every card links to its original thread so you can read the full context and check for updates or deletions. Subreddits referenced: <a href="https://www.reddit.com/r/Parenting/" target="_blank" rel="noopener">r/Parenting</a>, <a href="https://www.reddit.com/r/parentingteenagers/" target="_blank" rel="noopener">r/parentingteenagers</a>, <a href="https://www.reddit.com/r/teenagers/" target="_blank" rel="noopener">r/teenagers</a>.</p>
+</div>
+
+<script>
+const BRIEF=[
+ {topic:"school",label:"School",sub:"r/Parenting · Teenager 13–19 flair",title:"15-year-old has started refusing school on Mondays",concern:"Sample concern: mornings have become a battle — stomach aches, tears, then fine by evening. Parent worries about falling behind and whether to push or pause.",solution:"Top-voted sample reply: “We stopped debating at 7am. We made a Sunday-night plan with the school counsellor — late start Mondays for two weeks, one trusted teacher as check-in — and reviewed it together on Fridays. Attendance came back before grades did.”",votes:"▲ 842 · 317 comments"},
+ {topic:"screens",label:"Screens & phones",sub:"r/parentingteenagers",title:"Phone in the bedroom all night — how do other families handle it?",concern:"Sample concern: teen says everyone else keeps their phone overnight and that a charging rule means being cut off socially.",solution:"Top-voted sample reply: “Family charging station in the kitchen at 10:30pm — parents’ phones too. First week was rough, sleep visibly improved by week two. The ‘everyone else’ argument faded when it wasn’t teen-only.”",votes:"▲ 1,104 · 489 comments"},
+ {topic:"anxiety",label:"Anxiety & mood",sub:"r/Parenting",title:"Daughter panics before tests even when she knows the material",concern:"Sample concern: strong grades, but test mornings bring panic and requests to stay home. Parent unsure what is support vs. avoidance.",solution:"Top-voted sample reply: “Our therapist suggested practising the morning, not the test — same wake-up, breakfast, short walk — on non-test days too, so test day wasn’t the only ‘big’ morning. And we asked the school about a quiet room for the first 10 minutes.”",votes:"▲ 673 · 208 comments"},
+ {topic:"sleep",label:"Sleep",sub:"r/parentingteenagers",title:"Teen awake until 2am, impossible to wake at 6:30am",concern:"Sample concern: homework, phone and a late body clock collide with an early school start. Weekends shift even later.",solution:"Top-voted sample reply: “We moved the wake time, not just bedtime — same wake time weekends within an hour, bright light at breakfast, no naps after 4pm. Bedtime followed about 10 days later.”",votes:"▲ 921 · 356 comments"},
+ {topic:"friends",label:"Friends & social",sub:"r/Parenting",title:"Son was dropped from his friend group chat overnight",concern:"Sample concern: no fight he can name, just suddenly out. He is checking his phone constantly and dreading lunch.",solution:"Top-voted sample reply: “We didn’t try to fix the group. We helped him invite one kid from it for something low-key outside school. One real connection mattered more than getting back into the chat.”",votes:"▲ 758 · 274 comments"},
+ {topic:"independence",label:"Independence",sub:"r/parentingteenagers",title:"First solo trips — driving practice vs. rideshares at 16",concern:"Sample concern: parents disagree on readiness; teen feels trusted at school but not at home.",solution:"Top-voted sample reply: “We wrote the ladder down together: familiar daytime routes → one new route → night driving with a parent → solo. Each step had a clear ‘done when’ so it wasn’t endless ‘not yet’.”",votes:"▲ 512 · 189 comments"},
+ {topic:"screens",label:"Screens & phones",sub:"r/teenagers (teen view)",title:"Teens on screen-time rules: what they say actually works",concern:"Sample teen-side summary: teens are far more accepting of rules they helped set and that apply to parents too, and resent surprise phone checks most.",solution:"Most-upvoted teen sample comment: “If my parents check my phone randomly I just hide more. If we agreed the rule in advance I actually follow it.”",votes:"▲ 2,310 · 904 comments"},
+ {topic:"school",label:"School",sub:"r/Parenting",title:"Homework takes 4 hours — is it the work or the phone?",concern:"Sample concern: teen sits at desk all evening but output is small; parent doesn’t want nightly policing.",solution:"Top-voted sample reply: “25-minute sprints with the phone in another room, timer visible, breaks are real breaks. We tracked finished tasks, not hours sat — that changed the whole conversation.”",votes:"▲ 689 · 231 comments"},
+ {topic:"anxiety",label:"Anxiety & mood",sub:"r/parentingteenagers",title:"How do you know when ‘teen mood’ needs professional help?",concern:"Sample concern: withdrawn for weeks, dropped a favourite activity, sleep and appetite changed. Parent hesitates to overreact or underreact.",solution:"Top-voted sample reply: “Our paediatrician said watch function, not just mood: school, friends, eating, sleeping, the things they used to enjoy. When several slip for 2+ weeks, book the appointment — you don’t need certainty first.” Note: sample only, not medical advice.",votes:"▲ 1,467 · 512 comments"}
+];
+const LIB=[
+ {q:"My 15-year-old won't go to school",a:"Counsellor-backed late-start plan + Friday review. Parent reported attendance back in 3 weeks.",tag:"School",votes:"▲ 842"},
+ {q:"Phone at night — teen won't give it up",a:"Family charging station (parents included) at 10:30pm. Sleep improved by week two.",tag:"Screens",votes:"▲ 1,104"},
+ {q:"Panic before tests",a:"Rehearsing the test-day morning routine on ordinary days + quiet-room arrangement at school.",tag:"Anxiety",votes:"▲ 673"},
+ {q:"Awake until 2am, can't wake up",a:"Fixed wake time 7 days a week, morning light, no late naps. Bedtime shifted within 10 days.",tag:"Sleep",votes:"▲ 921"},
+ {q:"Dropped from the group chat",a:"One low-key invite outside school instead of fighting back into the chat.",tag:"Friends",votes:"▲ 758"},
+ {q:"Homework takes all evening",a:"25-minute phone-free sprints, tracking finished tasks not hours.",tag:"School",votes:"▲ 689"},
+ {q:"Won't talk after school",a:"Car rides and walks instead of face-to-face questions — side-by-side talk worked.",tag:"Friends",votes:"▲ 604"},
+ {q:"Anxiety — when to get help?",a:"Watch function across school, friends, sleep, appetite for 2+ weeks, then book via paediatrician.",tag:"Anxiety",votes:"▲ 1,467"}
+];
+const briefList=document.getElementById('briefList');
+function renderBrief(f){
+  const items=BRIEF.filter(b=>f==='all'||b.topic===f);
+  briefList.innerHTML=items.map(b=>`<article class="brief"><div class="brief-top"><span><span class="badge">${b.label}</span> <span class="badge sample">Sample</span> <span style="font-size:12px;color:var(--muted)">${b.sub}</span></span><span class="votes">${b.votes}</span></div><h3>${b.title}</h3><p>${b.concern}</p><div class="solution"><label>Most-upvoted solution</label><p>${b.solution}</p></div><p style="margin-top:10px;font-size:13px"><span style="color:var(--muted)">Live version: link to original thread here · Sample preview has no thread link</span></p></article>`).join('');
+  document.getElementById('briefEmpty').style.display=items.length?'none':'block';
+}
+function renderLib(q){
+  const query=(q||'').toLowerCase().trim();
+  const items=LIB.filter(x=>!query|| (x.q+' '+x.a+' '+x.tag).toLowerCase().includes(query));
+  document.getElementById('library').innerHTML=items.map(x=>`<div class="lib"><span class="badge sample">Sample</span> <span class="badge">${x.tag}</span><h4 style="margin-top:8px">${x.q}</h4><p><strong style="color:var(--ink)">What worked:</strong> ${x.a}</p><footer><span>${x.votes}</span><span>Community experience only</span></footer></div>`).join('');
+  document.getElementById('libEmpty').style.display=items.length?'none':'block';
+}
+document.getElementById('filters').addEventListener('click',e=>{
+  const btn=e.target.closest('button'); if(!btn) return;
+  document.querySelectorAll('#filters button').forEach(b=>b.classList.remove('active')); btn.classList.add('active');
+  renderBrief(btn.dataset.filter);
+});
+document.getElementById('search').addEventListener('input',e=>renderLib(e.target.value));
+document.getElementById('clearSearch').addEventListener('click',()=>{document.getElementById('search').value='';renderLib('');});
+renderBrief('all'); renderLib('');
+</script>
+</body>
+</html>
