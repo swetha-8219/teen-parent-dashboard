@@ -12,138 +12,326 @@
 :root{
   --bg:#f7f6f2; --surface:#ffffff; --surface2:#eef2ef; --ink:#1a2220; --muted:#5b6b66; --line:#dde3df;
   --teal:#0f766e; --teal-dark:#0b5e57; --amber:#b45309; --amber-bg:#fef3c7; --coral:#9a3412; --coral-bg:#ffedd5;
-  --chip:#e6ede9; --radius:16px;
+  --chip:#e6ede9; --radius:16px; --live:#166534; --live-bg:#dcfce7;
 }
 @media (prefers-color-scheme: dark){
-  :root{ --bg:#121816; --surface:#1a2320; --surface2:#222e2a; --ink:#eef2f0; --muted:#9fb0aa; --line:#2e3d38; --teal:#2dd4bf; --teal-dark:#5eead4; --amber:#fbbf24; --amber-bg:#3a2f0a; --coral:#fdba74; --coral-bg:#3b210f; --chip:#24332e; }
+  :root{ --bg:#121816; --surface:#1a2320; --surface2:#222e2a; --ink:#eef2f0; --muted:#9fb0aa; --line:#2e3d38; --teal:#2dd4bf; --teal-dark:#5eead4; --amber:#fbbf24; --amber-bg:#3a2f0a; --coral:#fdba74; --coral-bg:#3b210f; --chip:#24332e; --live:#86efac; --live-bg:#052e16; }
 }
 *{box-sizing:border-box}
 body{margin:0;background:var(--bg);color:var(--ink);font-family:"Public Sans",system-ui,sans-serif;line-height:1.55}
 a{color:var(--teal);text-decoration:none} a:hover{text-decoration:underline}
 button,input{font:inherit}
 .wrap{max-width:1180px;margin:0 auto;padding:0 18px 48px}
-.samplebar{background:#111827;color:#fde68a;padding:10px 18px;text-align:center;font-size:13px;font-weight:600;letter-spacing:.02em}
-.samplebar strong{background:#f59e0b;color:#111827;padding:2px 7px;border-radius:999px;font-size:11px;letter-spacing:.06em;margin-right:8px}
+.livebar{background:#14532d;color:#dcfce7;padding:10px 18px;text-align:center;font-size:13px;font-weight:600;letter-spacing:.02em}
+.livebar strong{background:#22c55e;color:#052e16;padding:2px 8px;border-radius:999px;font-size:11px;letter-spacing:.06em;margin-right:8px}
 header{padding:28px 0 10px}
-h1{font-family:"Newsreader",serif;font-size:clamp(32px,5vw,52px);line-height:.95;margin:0;letter-spacing:-.02em;max-width:720px}
+h1{font-family:"Newsreader",serif;font-size:clamp(32px,5vw,52px);line-height:.98;margin:0;letter-spacing:-.02em;max-width:760px}
 h1 em{font-style:italic;color:var(--teal)}
-.lede{color:var(--muted);font-size:17px;max-width:640px;margin:14px 0 0}
+.lede{color:var(--muted);font-size:17px;max-width:680px;margin:14px 0 0}
 .meta{display:flex;flex-wrap:wrap;gap:10px;margin-top:18px}
 .meta span{background:var(--surface);border:1px solid var(--line);border-radius:999px;padding:7px 12px;font-size:13px}
-.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin:22px 0}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin:22px 0 6px}
 .stat{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:16px}
 .stat b{font-family:"Newsreader",serif;font-size:32px;line-height:1;display:block}
 .stat label{font-size:12px;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);font-weight:700}
-.filters{display:flex;flex-wrap:wrap;gap:8px;margin:8px 0 18px}
-.filters button{min-height:40px;padding:8px 16px;border-radius:999px;border:1px solid var(--line);background:var(--surface);cursor:pointer;font-weight:600;font-size:14px}
+.filters{display:flex;flex-wrap:wrap;gap:8px;margin:16px 0 6px}
+.filters button{min-height:40px;padding:8px 16px;border-radius:999px;border:1px solid var(--line);background:var(--surface);cursor:pointer;font-weight:600;font-size:14px;color:var(--ink)}
 .filters button.active{background:var(--ink);color:var(--bg);border-color:var(--ink)}
-.grid{display:grid;grid-template-columns:1.9fr .95fr;gap:18px;align-items:start}
-.card{background:var(--surface);border:1px solid var(--line);border-radius:20px;padding:20px}
-.card h2{font-family:"Newsreader",serif;font-size:24px;margin:0 0 4px;line-height:1.1}
-.card p.sub{color:var(--muted);margin:0 0 16px;font-size:14px}
-.brief{border-top:1px solid var(--line);padding:18px 0}
-.brief:first-of-type{border-top:none;padding-top:4px}
-.brief-top{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;align-items:center}
+.searchrow{display:flex;gap:10px;flex-wrap:wrap;margin:10px 0 4px}
+.searchrow input{flex:1;min-width:220px;min-height:44px;padding:10px 14px;border-radius:999px;border:1px solid var(--line);background:var(--surface);color:var(--ink)}
+.searchrow button{min-height:44px;padding:0 18px;border-radius:999px;border:1px solid var(--line);background:var(--surface);cursor:pointer;font-weight:600;color:var(--ink)}
+.audience{margin-top:30px}
+.audience-head{display:flex;align-items:center;gap:14px;flex-wrap:wrap;border-bottom:2px solid var(--ink);padding-bottom:10px}
+.audience-head h2{font-family:"Newsreader",serif;font-size:clamp(26px,3.4vw,36px);margin:0;line-height:1.05}
+.audience-head .tag{font-size:11px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;background:var(--ink);color:var(--bg);padding:4px 10px;border-radius:999px}
+.audience-head p{flex-basis:100%;color:var(--muted);margin:2px 0 0;font-size:15px;max-width:760px}
+.cards{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:16px}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:20px;padding:20px;display:flex;flex-direction:column}
+.card-top{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;align-items:center}
 .badge{font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;padding:4px 8px;border-radius:999px;background:var(--chip)}
-.badge.sample{background:var(--amber-bg);color:var(--amber)}
-.brief h3{margin:8px 0 6px;font-size:18px;line-height:1.3}
-.brief p{margin:0;color:var(--muted);font-size:14.5px}
+.badge.live{background:var(--live-bg);color:var(--live)}
+.card h3{margin:10px 0 6px;font-size:18px;line-height:1.3}
+.card h3 a{color:var(--ink)} .card h3 a:hover{color:var(--teal);text-decoration:underline}
+.card p{margin:0;color:var(--muted);font-size:14.5px}
 .solution{margin-top:12px;background:var(--surface2);border-radius:12px;padding:14px}
 .solution label{font-size:11px;letter-spacing:.07em;text-transform:uppercase;font-weight:700;color:var(--teal)}
-.solution p{color:var(--ink);margin:4px 0 0}
+.solution p{color:var(--ink);margin:4px 0 0;font-size:14.5px}
+.solution p + p{margin-top:8px}
 .votes{font-size:13px;color:var(--muted);white-space:nowrap}
-.side-stack{display:grid;gap:18px}
-.mirror-item{padding:12px 0;border-top:1px solid var(--line)}
-.mirror-item:first-of-type{border-top:none}
-.mirror-item b{display:block;font-size:15px}
-.mirror-item p{margin:4px 0 0;color:var(--muted);font-size:14px}
-.radar-item{display:flex;gap:12px;padding:12px 0;border-top:1px solid var(--line)}
-.radar-item:first-of-type{border-top:none}
-.dot{width:10px;height:10px;border-radius:50%;background:#f59e0b;margin-top:6px;flex-shrink:0}
-.dot.high{background:#dc2626}
-.searchrow{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:14px}
-.searchrow input{flex:1;min-width:220px;min-height:44px;padding:10px 14px;border-radius:999px;border:1px solid var(--line);background:var(--bg);color:var(--ink)}
-.library{display:grid;grid-template-columns:1fr 1fr;gap:12px}
-.lib{background:var(--surface2);border-radius:14px;padding:16px}
-.lib h4{margin:0 0 6px;font-size:15px;line-height:1.35}
-.lib p{margin:0;color:var(--muted);font-size:14px}
-.lib footer{margin-top:10px;font-size:12px;color:var(--muted);display:flex;justify-content:space-between}
-.crisis{margin-top:18px;background:#7f1d1d;color:#fff;border-radius:20px;padding:22px;display:grid;grid-template-columns:1.2fr .8fr;gap:18px}
+.card .threadlink{margin-top:auto;padding-top:14px;font-size:13.5px;font-weight:600}
+.note{font-size:13px;color:var(--muted);margin-top:10px}
+.trending{background:var(--surface);border:1px solid var(--line);border-radius:20px;padding:20px;margin-top:16px}
+.trending h3{font-family:"Newsreader",serif;font-size:21px;margin:0 0 4px}
+.trending p.sub{color:var(--muted);margin:0 0 10px;font-size:14px}
+.trend-list{list-style:none;margin:0;padding:0;columns:2;column-gap:28px}
+.trend-list li{padding:8px 0;border-top:1px solid var(--line);break-inside:avoid;font-size:14.5px}
+.trend-list li:first-child{border-top:none}
+.trend-list .tv{color:var(--muted);font-size:12.5px;white-space:nowrap}
+.crisis{margin-top:26px;background:#7f1d1d;color:#fff;border-radius:20px;padding:22px;display:grid;grid-template-columns:1.2fr .8fr;gap:18px}
 @media (prefers-color-scheme: dark){.crisis{background:#450a0a}}
-.crisis h2{color:#fff;margin:0}
+.crisis h2{color:#fff;margin:0;font-family:"Newsreader",serif;font-size:24px}
 .crisis p{color:#fecaca}
 .crisis a{color:#fff;text-decoration:underline;font-weight:700}
 .crisis-box{background:rgba(255,255,255,.12);border-radius:14px;padding:16px}
+.crisis-box p{color:#fff}
 .foot{color:var(--muted);font-size:13px;margin-top:20px;line-height:1.6}
-.empty{padding:28px;text-align:center;color:var(--muted);border:1px dashed var(--line);border-radius:14px;display:none}
-@media(max-width:860px){.grid{grid-template-columns:1fr}.stats{grid-template-columns:1fr 1fr}.library{grid-template-columns:1fr}.crisis{grid-template-columns:1fr}}
+.empty{padding:28px;text-align:center;color:var(--muted);border:1px dashed var(--line);border-radius:14px;display:none;margin-top:16px}
+@media(max-width:860px){.cards{grid-template-columns:1fr}.stats{grid-template-columns:1fr 1fr}.crisis{grid-template-columns:1fr}.trend-list{columns:1}}
 </style>
 </head>
 <body>
-<div class="samplebar"><strong>SAMPLE DATA</strong> Preview only — example posts, not live Reddit data. Live feed needs Reddit API access.</div>
+<div class="livebar"><strong>LIVE DATA</strong> Week of November 11–18, 2026 · Fetched November 18, 2026 via RedditAPIs</div>
 <div class="wrap">
 <header>
-<h1>What parents of teens are <em>actually</em> talking about today</h1>
-<p class="lede">A daily synthesis from r/Parenting, r/parentingteenagers and r/teenagers — rising concerns, the most-upvoted advice that followed, and what teens are saying on their side. Read-only, anonymised, always linked back.</p>
-<div class="meta"><span>📅 Sample snapshot · Tue, Nov 17, 2026</span><span>Sources: 3 subreddits (sample)</span><span>Not medical advice — community experience only</span></div>
+<h1>What parents of teens are <em>actually</em> talking about this week</h1>
+<p class="lede">The top posts and top comments of the week from r/Parenting, r/parentingteenagers, r/teenagers, r/LGBTeens and r/ADHD — what teenagers are going through, the solutions other parents offered, and what teens are saying to each other. Read-only and always linked back to the original thread.</p>
+<div class="meta"><span>📅 Week of Nov 11–18, 2026 · fetched Nov 18, 2026</span><span>Sources: 5 subreddits with posts this week</span><span>Not medical advice — community experience only</span></div>
 <div class="stats">
-<div class="stat"><b>1,284</b><label>Threads scanned*</label></div>
-<div class="stat"><b>9</b><label>Rising concerns</label></div>
-<div class="stat"><b>42</b><label>“What worked” reports</label></div>
-<div class="stat"><b>3</b><label>Early warnings</label></div>
+<div class="stat"><b>45</b><label>Top posts pulled</label></div>
+<div class="stat"><b>20</b><label>Parent-side posts</label></div>
+<div class="stat"><b>25</b><label>Teen-side posts</label></div>
+<div class="stat"><b>6</b><label>Subreddits checked*</label></div>
 </div>
-<p style="font-size:12px;color:var(--muted);margin:-10px 0 0">* Sample counts for layout. Real counts will appear when live data is connected.</p>
+<p style="font-size:12px;color:var(--muted);margin:2px 0 0">* r/TeenParenting was also checked and returned no posts this week.</p>
 </header>
 
 <div class="filters" id="filters" role="group" aria-label="Filter by topic">
 <button class="active" data-filter="all">All topics</button>
-<button data-filter="screens">📱 Screens &amp; phones</button>
-<button data-filter="school">🎒 School</button>
-<button data-filter="anxiety">🧠 Anxiety &amp; mood</button>
-<button data-filter="sleep">🌙 Sleep</button>
 <button data-filter="friends">👥 Friends &amp; social</button>
-<button data-filter="independence">🚗 Independence</button>
+<button data-filter="school">🎒 School</button>
+<button data-filter="mental">🧠 Mental health</button>
+<button data-filter="screens">📱 Screens &amp; rules</button>
+<button data-filter="sleep">🌙 Sleep</button>
+<button data-filter="money">💵 Money &amp; independence</button>
+<button data-filter="identity">🏳️‍🌈 Identity</button>
+<button data-filter="adhd">⚡ ADHD &amp; focus</button>
+<button data-filter="family">🏠 Family life</button>
+</div>
+<div class="searchrow"><input id="search" type="search" placeholder="Search this week’s threads… e.g. school, phone, coming out" aria-label="Search this week's threads"/><button id="clearSearch">Clear</button></div>
+<div class="empty" id="noResults">Nothing this week matches that filter. Try another topic, or clear the search.</div>
+
+<!-- ===================== FOR PARENTS ===================== -->
+<section class="audience" id="parentsSection" aria-labelledby="parents-h">
+<div class="audience-head">
+<span class="tag">For parents</span>
+<h2 id="parents-h">What teenagers are going through — and what helped</h2>
+<p>From r/Parenting and r/parentingteenagers. Each card is a real thread from this week; the solution shown is that thread’s top comment, lightly trimmed. Removed or deleted comments and moderator bot notices are left out.</p>
+</div>
+<div class="cards">
+
+<article class="card" data-topic="friends">
+<div class="card-top"><span><span class="badge">Friends &amp; social</span> <span class="badge live">r/Parenting</span></span><span class="votes">▲ 772 · 202 comments</span></div>
+<h3><a href="https://reddit.com/r/Parenting/comments/1xvanfl/13_yearold_daughter_has_joined_the_meangirl_pack/" target="_blank" rel="noopener">13-year-old daughter has joined the mean-girl pack — and it’s driving me nuts</a></h3>
+<p>A parent writes that their daughter turned 13 and abruptly dropped her kind friends to roll with the wealthy “mean girls” — dressing identically, disrupting class, and constantly asking for money for Sephora and expensive frozen yogurt, even borrowing from friends. They can’t order her to change friends or clothes, and don’t know what “saying no” should look like here.</p>
+<div class="solution"><label>Top comment · ▲ 1,064</label>
+<p>“Spend more family time with her so she has less time to spend with friends — healthy activities that she would like, not just dragging her around on errands. Which she’ll probably hate (or at least act like she hates) but may help her get back on track.”</p>
+<p style="color:var(--muted)"><strong style="color:var(--ink)">Also highly upvoted (▲ 729):</strong> “Have an actual conversation driven by curiosity… telling her what you notice, WITHOUT JUDGEMENT. You run the risk of alienating her further into this group if all you do is lecture and tell her how much you miss how she used to be.”</p></div>
+<p class="threadlink"><a href="https://reddit.com/r/Parenting/comments/1xvanfl/13_yearold_daughter_has_joined_the_meangirl_pack/" target="_blank" rel="noopener">Read the original thread →</a></p>
+</article>
+
+<article class="card" data-topic="school">
+<div class="card-top"><span><span class="badge">School</span> <span class="badge live">r/parentingteenagers</span></span><span class="votes">▲ 38 · 111 comments</span></div>
+<h3><a href="https://reddit.com/r/parentingteenagers/comments/1xv6ics/none_of_the_parenting_books_covered_this/" target="_blank" rel="noopener">“None of the parenting books covered this” — a senior failing every class</a></h3>
+<p>A parent’s son is failing every class in his senior year: sleeping in, missing mornings, turning nothing in — despite AP classes, calculus, and PSAT/SAT scores in the 99th percentile. College marketing mail arrives daily while his GPA sinks, and he won’t talk about it or accept help. Parent–teacher conferences are a week away.</p>
+<div class="solution"><label>Top comment · ▲ 33</label>
+<p>“I would take him to a therapist. Did something happen? Is this new behavior?” — the thread’s most-upvoted reply treats the sudden shutdown as a signal to investigate, not a discipline problem. The full thread (111 comments) has more from parents who’ve been through a senior-year collapse.</p></div>
+<p class="threadlink"><a href="https://reddit.com/r/parentingteenagers/comments/1xv6ics/none_of_the_parenting_books_covered_this/" target="_blank" rel="noopener">Read the original thread →</a></p>
+</article>
+
+<article class="card" data-topic="mental">
+<div class="card-top"><span><span class="badge">Mental health</span> <span class="badge live">r/parentingteenagers</span></span><span class="votes">▲ 17 · 30 comments</span></div>
+<h3><a href="https://reddit.com/r/parentingteenagers/comments/1xyo1yv/teen_mental_health/" target="_blank" rel="noopener">Teen mental health: missing school, refusing medication, asking to “recharge”</a></h3>
+<p>A parent’s 15-year-old, diagnosed with PTSD and depression, has missed two days of school in a row and is refusing medication, saying they just need a couple of days to recharge. The parent is torn between honouring their mental health and protecting big career goals that depend on staying in school.</p>
+<div class="solution"><label>Top comment · ▲ 23</label>
+<p>From a parent whose teen with the same diagnosis recovered: “She could choose 1 day in 3 weeks to take a mental health day from school. Therapy 2× a week, and no school before or after her appointment. We accompanied her to her hobby/sport — that was non-negotiable, and she thanks us now for it. Meds were really, really helpful beside therapy. One family outing on the weekend, nothing else.” Another parent (▲ 12) added: don’t get too worked up about the school aspect — clue the school in early, and focus on supporting your kid.</p></div>
+<p class="threadlink"><a href="https://reddit.com/r/parentingteenagers/comments/1xyo1yv/teen_mental_health/" target="_blank" rel="noopener">Read the original thread →</a></p>
+</article>
+
+<article class="card" data-topic="mental">
+<div class="card-top"><span><span class="badge">Mental health</span> <span class="badge live">r/parentingteenagers</span></span><span class="votes">▲ 100 · 22 comments</span></div>
+<h3><a href="https://reddit.com/r/parentingteenagers/comments/1xw8lb5/it_gets_better/" target="_blank" rel="noopener">“It gets better” — a parent checking in from the other side</a></h3>
+<p>The week’s most-upvoted r/parentingteenagers post is a hope note: a parent whose son just turned 19 writes that after years of tension and fear, “he is pretty damn great… It’s not perfect — very far from it — but I am not worried or sad anymore.”</p>
+<div class="solution"><label>Top comment · ▲ 18</label>
+<p>“We went through hell around 15 with my oldest. They were starting on a very bad path. After one friend went to jail, another in rehab, they started to realize it themselves and pulled away. Also 19 now. Has a good career job… Back then, I didn’t think we were going to make it through. I thought I was going to lose them to drugs or jail. I’m proud of who he is becoming.” Others echoed the pattern: 13–16 were the hardest years, then it turned.</p></div>
+<p class="threadlink"><a href="https://reddit.com/r/parentingteenagers/comments/1xw8lb5/it_gets_better/" target="_blank" rel="noopener">Read the original thread →</a></p>
+</article>
+
+<article class="card" data-topic="family">
+<div class="card-top"><span><span class="badge">Family life</span> <span class="badge live">r/Parenting</span></span><span class="votes">▲ 1,865 · 1,026 comments</span></div>
+<h3><a href="https://reddit.com/r/Parenting/comments/1xvzl5s/my_friend_gave_us_handmedowns_plus_her_own/" target="_blank" rel="noopener">The week’s most-discussed thread: hand-me-downs, pride, and a husband who hates it</a></h3>
+<p>A friend passed on her daughter’s outgrown clothes — plus a couple of her own dresses — and the poster’s husband hated it. Not a teen-specific thread, but with 1,026 comments it was r/Parenting’s biggest conversation of the week, and the poster’s edit is worth reading: her husband grew up with very little and was raised never to accept charity, which is why it hit a nerve.</p>
+<div class="solution"><label>Top comment · ▲ 4,823</label>
+<p>“This is totally normal and I can’t understand what the issue even is here other than a distorted sense of pride.” The overwhelming consensus: casual clothes-swapping between families is normal, and the reaction was about upbringing, not the clothes.</p></div>
+<p class="threadlink"><a href="https://reddit.com/r/Parenting/comments/1xvzl5s/my_friend_gave_us_handmedowns_plus_her_own/" target="_blank" rel="noopener">Read the original thread →</a></p>
+</article>
+
+<article class="card" data-topic="family">
+<div class="card-top"><span><span class="badge">Family life</span> <span class="badge live">r/Parenting</span></span><span class="votes">▲ 363 · 448 comments</span></div>
+<h3><a href="https://reddit.com/r/Parenting/comments/1xx5yml/feeling_like_a_horrible_parent_and_racked_with/" target="_blank" rel="noopener">“Did I do the right thing?” — guilt after a punishment that landed on another kid</a></h3>
+<p>After their 5-year-old slapped and kicked them during a meltdown in a store, a parent cancelled her trip to a classmate’s birthday party — then felt awful, wondering if the punishment fit, and whether they’d really punished the classmate. A younger child, but the discipline question — and the guilt — will be familiar to any parent of a teen.</p>
+<div class="solution"><label>Top comment · ▲ 888</label>
+<p>“I don’t use other children’s celebrations that I’ve RSVP’d to as a punishment for my children. I think it’s disrespectful to the child whose party is being used… I would be willing to take away other things.” (A moderator resource comment in this thread is excluded, per this dashboard’s rules.)</p></div>
+<p class="threadlink"><a href="https://reddit.com/r/Parenting/comments/1xx5yml/feeling_like_a_horrible_parent_and_racked_with/" target="_blank" rel="noopener">Read the original thread →</a></p>
+</article>
+
+<article class="card" data-topic="money">
+<div class="card-top"><span><span class="badge">Money &amp; independence</span> <span class="badge live">r/parentingteenagers</span></span><span class="votes">▲ 17 · 52 comments</span></div>
+<h3><a href="https://reddit.com/r/parentingteenagers/comments/1xxrm12/new_parent_to_a_teen_christmas/" target="_blank" rel="noopener">New parent to a teen — how do you do Christmas when everything they want is expensive?</a></h3>
+<p>A newly single parent who has taken in their nephew permanently wants to make his first Christmas special on a tight budget. Their system — one costly item, a few small wants, then necessities — got strange looks from friends, so they asked other parents of teens how they navigate it.</p>
+<div class="solution"><label>Top comments · ▲ 10 and ▲ 9</label>
+<p>“Kids put a lot of stuff on their list — they don’t (or shouldn’t) expect to get it all. One big item off the list is great.” And: “Sit down with him and talk about your budget. Ask him to prioritize what he wants and needs.” A stocking full of small, fun things was the other recurring tip.</p></div>
+<p class="threadlink"><a href="https://reddit.com/r/parentingteenagers/comments/1xxrm12/new_parent_to_a_teen_christmas/" target="_blank" rel="noopener">Read the original thread →</a></p>
+</article>
+
+<article class="card" data-topic="screens">
+<div class="card-top"><span><span class="badge">Screens &amp; rules</span> <span class="badge live">r/parentingteenagers</span></span><span class="votes">▲ 11 · 55 comments</span></div>
+<h3><a href="https://reddit.com/r/parentingteenagers/comments/1xwzz33/need_new_approach/" target="_blank" rel="noopener">“Need new approach” — a 13-year-old keeps hiding social media</a></h3>
+<p>A parent’s 13-year-old (who has ODD and ADHD) keeps going behind their back onto social media — hiding apps in a hidden iPhone folder, using a fake profile name — while their 15-year-old follows the no-social-media rule without issue. Grounding and “dumb mode” haven’t worked, and the parent suspects stricter punishment will only fuel rebound behaviour. The thread (55 comments) is parents comparing approaches; the top comments weren’t in this week’s fetch, so read the discussion in full at the source.</p>
+<p class="threadlink"><a href="https://reddit.com/r/parentingteenagers/comments/1xwzz33/need_new_approach/" target="_blank" rel="noopener">Read the original thread →</a></p>
+</article>
+
 </div>
 
-<div class="grid">
-<section class="card" aria-labelledby="brief-h">
-<h2 id="brief-h">Today’s brief — rising concerns &amp; top solutions</h2>
-<p class="sub">Each concern is in parents’ own words (paraphrased in this sample). The solution shown is the highest-upvoted reply in that thread.</p>
-<div id="briefList"></div>
-<div class="empty" id="briefEmpty">No sample posts for this topic yet. Try another filter — in the live version this fills from the day’s threads.</div>
+<div class="trending">
+<h3>Also trending with parents this week</h3>
+<p class="sub">The rest of the week’s top parent-side threads, linked at the source.</p>
+<ul class="trend-list">
+<li><a href="https://reddit.com/r/Parenting/comments/1xzhhs5/goodbye_woody_and_buzz/" target="_blank" rel="noopener">Goodbye Woody and Buzz — the nostalgia of donating childhood toys</a> <span class="tv">r/Parenting · ▲ 425 · 98 comments</span></li>
+<li><a href="https://reddit.com/r/Parenting/comments/1xwys1z/parents_and_kids_showed_up_to_my_sons_bday/" target="_blank" rel="noopener">Parents and kids showed up to my son’s birthday without RSVP-ing</a> <span class="tv">r/Parenting · ▲ 408 · 109 comments</span></li>
+<li><a href="https://reddit.com/r/Parenting/comments/1xvl0ax/managing_an_adult_child_living_at_home/" target="_blank" rel="noopener">Managing an adult child living at home</a> <span class="tv">r/Parenting · ▲ 360 · 370 comments</span></li>
+<li><a href="https://reddit.com/r/Parenting/comments/1xyrduj/i_feel_like_i_was_never_a_mother_to_him_at_all/" target="_blank" rel="noopener">“I feel like I was never a mother to him at all” — a toddler’s cold shoulder after a new baby</a> <span class="tv">r/Parenting · ▲ 249 · 84 comments</span></li>
+<li><a href="https://reddit.com/r/Parenting/comments/1xupa8y/dealing_with_a_difficult_friend/" target="_blank" rel="noopener">Dealing with a difficult friend in the kids’ friend group</a> <span class="tv">r/Parenting · ▲ 200 · 49 comments</span></li>
+<li><a href="https://reddit.com/r/Parenting/comments/1xudgyj/are_we_messing_up/" target="_blank" rel="noopener">Are we messing up? How much grief to share with kids</a> <span class="tv">r/Parenting · ▲ 191 · 97 comments</span></li>
+<li><a href="https://reddit.com/r/Parenting/comments/1xxqn9i/do_you_make_your_kids_attend_holidays/" target="_blank" rel="noopener">Do you make your kids attend holidays? The Thanksgiving debate</a> <span class="tv">r/Parenting · ▲ 176 · 417 comments</span></li>
+<li><a href="https://reddit.com/r/parentingteenagers/comments/1xx1fug/18_yr_old_bringing_in_bf_when_im_not_home/" target="_blank" rel="noopener">18-year-old bringing her boyfriend in when I’m not home</a> <span class="tv">r/parentingteenagers · ▲ 11 · 261 comments</span></li>
+<li><a href="https://reddit.com/r/parentingteenagers/comments/1xzshml/paying_for_expenses_in_college/" target="_blank" rel="noopener">Paying for expenses in college — what should she cover?</a> <span class="tv">r/parentingteenagers · ▲ 8 · 40 comments</span></li>
+<li><a href="https://reddit.com/r/parentingteenagers/comments/1xye9x8/how_to_protect_my_kids/" target="_blank" rel="noopener">How to protect my younger kids around an older teen in crisis</a> <span class="tv">r/parentingteenagers · ▲ 8 · 13 comments</span></li>
+<li><a href="https://reddit.com/r/parentingteenagers/comments/1xwept8/should_i_give_an_18_year_old_20k/" target="_blank" rel="noopener">Should I give an 18-year-old £20k?</a> <span class="tv">r/parentingteenagers · ▲ 5 · 34 comments</span></li>
+</ul>
+<p class="note">One r/parentingteenagers thread this week described a teen’s past suicide attempt in detail. Following this dashboard’s rule, it is not summarised here — if it resonates with your family, please use the crisis resources below; the <a href="https://reddit.com/r/parentingteenagers/comments/1xwrser/what_should_i_do_with_my_16_year_old_when_ive/" target="_blank" rel="noopener">original thread</a> is there for parents in the same place.</p>
+</div>
 </section>
 
-<aside class="side-stack">
-<section class="card">
-<h2>Teen-side mirror</h2>
-<p class="sub">What teens are posting about this week in r/teenagers — summarised, never quoted with usernames.</p>
-<div class="mirror-item"><b>“Everyone’s exhausted by November”</b><p>Sample trend: sleep debt + early college deadlines dominate. Many teens say they’re not lazy — they’re tired and anxious about grades slipping.</p></div>
-<div class="mirror-item"><b>Group chats as social pressure</b><p>Sample trend: being left on “read”, screenshots shared out of context, and pressure to reply instantly come up repeatedly.</p></div>
-<div class="mirror-item"><b>Wanting space, not distance</b><p>Sample trend: teens asking how to tell parents they need alone time after school without it turning into an argument.</p></div>
-<p style="font-size:13px"><a href="https://www.reddit.com/r/teenagers/" target="_blank" rel="noopener">Browse r/teenagers →</a> &nbsp;·&nbsp; <a href="https://www.reddit.com/r/Parenting/" target="_blank" rel="noopener">r/Parenting →</a></p>
-</section>
+<!-- ===================== FOR TEENS ===================== -->
+<section class="audience" id="teensSection" aria-labelledby="teens-h">
+<div class="audience-head">
+<span class="tag">For teens</span>
+<h2 id="teens-h">What your peers are going through — and what’s helping them</h2>
+<p>From r/teenagers, r/LGBTeens and r/ADHD. Written by teens and young people themselves this week, with the peer replies that rose to the top. Usernames are never shown.</p>
+</div>
+<div class="cards">
 
-<section class="card">
-<h2>Early-warning radar</h2>
-<p class="sub">Terms spiking in teen subs before they hit the news. Sample flags only.</p>
-<div class="radar-item"><span class="dot high"></span><div><b style="font-size:15px">“Sleepmaxxing” challenges</b><p style="margin:2px 0 0;color:var(--muted);font-size:14px">Sample: extreme sleep hacks circulating on short-video apps. Worth a calm conversation, not a ban-first reaction.</p></div></div>
-<div class="radar-item"><span class="dot"></span><div><b style="font-size:15px">AI homework helpers — new names</b><p style="margin:2px 0 0;color:var(--muted);font-size:14px">Sample: two new tools mentioned 3× more this week. Check your school’s policy together.</p></div></div>
-<div class="radar-item"><span class="dot"></span><div><b style="font-size:15px">Vaping in school bathrooms — again</b><p style="margin:2px 0 0;color:var(--muted);font-size:14px">Sample: renewed chatter after a quiet month, mostly in parent threads.</p></div></div>
-</section>
+<article class="card" data-topic="screens">
+<div class="card-top"><span><span class="badge">Screens &amp; rules</span> <span class="badge live">r/teenagers</span></span><span class="votes">▲ 7,404 · 360 comments</span></div>
+<h3><a href="https://reddit.com/r/teenagers/comments/1xvurps/healthy_or_too_much/" target="_blank" rel="noopener">“Healthy or too much?” — the week’s biggest teen thread is about parental controls</a></h3>
+<p>An image post asking whether a strict set of parental controls is healthy or too much became r/teenagers’ most-upvoted thread of the week by a wide margin. The verdict in the replies was blunt — and one commenter described living under even tighter rules: no phone, parents controlling the Wi-Fi, no lock on their bedroom door, cameras around the house, about an hour of free screen time a week.</p>
+<div class="solution"><label>Top comment · ▲ 1,334</label>
+<p>“It would be healthy for a 6 year old, not a 16 year old.” If you’re on the receiving end of rules like these, this thread is 360 comments of peers comparing what their families do — useful context for a calmer conversation at home about what the rules are actually for.</p></div>
+<p class="threadlink"><a href="https://reddit.com/r/teenagers/comments/1xvurps/healthy_or_too_much/" target="_blank" rel="noopener">Read the original thread →</a></p>
+</article>
 
-<section class="card" style="background:var(--amber-bg);border-color:transparent">
-<h2 style="font-size:20px">How live data will work</h2>
-<p style="font-size:14px;color:var(--ink)">When Reddit API access is sorted, this same layout fills automatically each morning. Nothing here posts, votes, or identifies anyone — it only reads public threads and links back to them. Posts flagged for self-harm are never shown as content.</p>
-</section>
-</aside>
+<article class="card" data-topic="sleep adhd">
+<div class="card-top"><span><span class="badge">Sleep</span> <span class="badge live">r/ADHD</span></span><span class="votes">▲ 777 · 111 comments</span></div>
+<h3><a href="https://reddit.com/r/ADHD/comments/1xzkqwy/how_do_you_stop_the_this_is_the_only_free_time_i/" target="_blank" rel="noopener">The late-night spiral: “this is the only free time I have”</a></h3>
+<p>“My days are full of things I have to do, so the hours after everyone else goes to bed are the only ones that feel like mine. I tell myself I’ll watch one episode… and then it’s 2am.” The poster has tried bedtime alarms and putting the phone in another room — the alarm gets snoozed. Dozens of replies say: same.</p>
+<div class="solution"><label>Peer tip that rose to the top · ▲ 168</label>
+<p>“I shifted to wake up earlier. I go to sleep at 10 and wake up at 5 and mess around for a couple hours before the day gets started. I don’t do this consistently, but it gets rid of that guilty ‘why did I stay up so late’ feeling when I do.” Another well-supported take (▲ 61): carve out real free time during the day, because the spiral is your brain collecting time it feels owed — self-trust that there will be more later makes it easier to stop.</p></div>
+<p class="threadlink"><a href="https://reddit.com/r/ADHD/comments/1xzkqwy/how_do_you_stop_the_this_is_the_only_free_time_i/" target="_blank" rel="noopener">Read the original thread →</a></p>
+</article>
+
+<article class="card" data-topic="adhd">
+<div class="card-top"><span><span class="badge">ADHD &amp; focus</span> <span class="badge live">r/ADHD</span></span><span class="votes">▲ 778 · 24 comments</span></div>
+<h3><a href="https://reddit.com/r/ADHD/comments/1xy1ffz/update_chronically_late_person_has_been_on_time_3/" target="_blank" rel="noopener">A win: “Chronically late person has been on time 3 times this week”</a></h3>
+<p>Someone who is “ALWAYS 5–7 minutes late to everything” reports being on time to work three times in one week — “I haven’t done that like, ever!” Two changes did it: a bunch of mini analog clocks set up around the house, and paying attention to only one number — the time they have to leave by — instead of juggling the whole commute.</p>
+<div class="solution"><label>What worked, in their words</label>
+<p>“Someone suggested I ONLY pay attention to the time I have to leave by. It’s taken a lot of stress and tediousness out of my commute.” One honest caution from the top reply (▲ 370): give any new system time — novelty fades, so judge it in a few weeks, not a few days.</p></div>
+<p class="threadlink"><a href="https://reddit.com/r/ADHD/comments/1xy1ffz/update_chronically_late_person_has_been_on_time_3/" target="_blank" rel="noopener">Read the original thread →</a></p>
+</article>
+
+<article class="card" data-topic="adhd">
+<div class="card-top"><span><span class="badge">ADHD &amp; focus</span> <span class="badge live">r/ADHD</span></span><span class="votes">▲ 993 · 85 comments</span></div>
+<h3><a href="https://reddit.com/r/ADHD/comments/1xuhcem/guys_i_finally_did_it/" target="_blank" rel="noopener">“GUYS I FINALLY DID IT!!!!” — booking the dentist after years of putting it off</a></h3>
+<p>After years of “I really need to book that dentist appointment,” one poster finally went — not since before 2020. “Something so simple turned into this massive, overwhelming task in my head, and suddenly YEARS have passed.” The replies are a wall of people who know exactly that feeling.</p>
+<div class="solution"><label>Top comment · ▲ 168, plus the practical tip</label>
+<p>“The dentistry community doesn’t understand how difficult it can be with ADHD to do things like this… I’m really proud of you for making this step.” The tip worth stealing (▲ 24): every time you go, book the next appointment before you leave and put it in your calendar right there — one less roadblock next time.</p></div>
+<p class="threadlink"><a href="https://reddit.com/r/ADHD/comments/1xuhcem/guys_i_finally_did_it/" target="_blank" rel="noopener">Read the original thread →</a></p>
+</article>
+
+<article class="card" data-topic="adhd mental">
+<div class="card-top"><span><span class="badge">ADHD &amp; focus</span> <span class="badge live">r/ADHD</span></span><span class="votes">▲ 2,022 · 207 comments</span></div>
+<h3><a href="https://reddit.com/r/ADHD/comments/1xwhz7e/ive_forgotten_most_of_my_life_and_it_is_crushing/" target="_blank" rel="noopener">“I’ve forgotten most of my life and it is crushing me”</a></h3>
+<p>r/ADHD’s top post of the week: someone realising they can’t trust their memory at work, carrying note cards to remember tasks, deleting every picture, documenting nothing — then looking at old family photos and remembering none of it. “People bring up stories and I just can’t remember what they are talking about.”</p>
+<div class="solution"><label>Top reply · ▲ 872</label>
+<p>“I became a photographer, partially because I couldn’t remember shit… The world isn’t meant for us, and it isn’t kind to us.” The thread’s shared coping strategy: document your life on purpose — photos, notes, voice memos — because memory won’t do it for you. One measured reply (▲ 174) adds that long-term memory loss isn’t a typical ADHD symptom and is worth raising with a doctor. (A removed comment in this thread is excluded.)</p></div>
+<p class="threadlink"><a href="https://reddit.com/r/ADHD/comments/1xwhz7e/ive_forgotten_most_of_my_life_and_it_is_crushing/" target="_blank" rel="noopener">Read the original thread →</a></p>
+</article>
+
+<article class="card" data-topic="adhd money">
+<div class="card-top"><span><span class="badge">ADHD &amp; focus</span> <span class="badge live">r/ADHD</span></span><span class="votes">▲ 1,533 · 908 comments</span></div>
+<h3><a href="https://reddit.com/r/ADHD/comments/1xx4212/people_with_adhd_how_the_hell_did_you_find_a/" target="_blank" rel="noopener">“How the hell did you find a career that doesn’t make your brain shut down?”</a></h3>
+<p>A 25-year-old, recently diagnosed with inattentive ADHD, describes years of burnout and procrastination — and the specific misery of understimulation: “It’s not ordinary boredom. It’s unbearable, like my brain is slowly rotting.” With 908 comments, this is the week’s biggest peer-advice thread on the teen side.</p>
+<div class="solution"><label>Top replies · ▲ 653 and ▲ 354</label>
+<p>“I’m a therapist and my hyperfixation is trying to know everything about people…” And: disaster recovery — “very dynamic, every day is different; in the thick of a large event, every minute is different. It burns out people without ADHD very quickly.” The pattern across the thread: fast-moving, varied, high-stakes or outdoor work (trauma centres, park naturalist, homeless outreach) keeps ADHD brains engaged where routine desk work doesn’t.</p></div>
+<p class="threadlink"><a href="https://reddit.com/r/ADHD/comments/1xx4212/people_with_adhd_how_the_hell_did_you_find_a/" target="_blank" rel="noopener">Read the original thread →</a></p>
+</article>
+
+<article class="card" data-topic="identity friends">
+<div class="card-top"><span><span class="badge">Identity</span> <span class="badge live">r/LGBTeens</span></span><span class="votes">▲ 5 · 1 comment</span></div>
+<h3><a href="https://reddit.com/r/LGBTeens/comments/1xxyo9y/recently_learned_im_bi_coming_out/" target="_blank" rel="noopener">“Recently learned I’m bi” — and worried about telling Dad</a></h3>
+<p>A teen who has only told a few people worries their dad won’t accept them — he’s said before that there are only two or three sexualities: straight, gay, lesbian. They’re asking for advice on how to come out.</p>
+<div class="solution"><label>Peer reply · ▲ 2</label>
+<p>“It’s so amazing that you have learned you’re bi! I hope you feel proud of yourself. Telling parents is a hard step, and it may take time to gather the courage. Maybe start by showing subtle hints somehow, so they aren’t as shocked — talk about queer movies you’ve watched in casual conversation… so when you do tell them, it isn’t coming from nowhere.” You get to choose the timing. If home doesn’t feel safe yet, waiting is a valid choice too.</p></div>
+<p class="threadlink"><a href="https://reddit.com/r/LGBTeens/comments/1xxyo9y/recently_learned_im_bi_coming_out/" target="_blank" rel="noopener">Read the original thread →</a></p>
+</article>
+
+<article class="card" data-topic="identity">
+<div class="card-top"><span><span class="badge">Identity</span> <span class="badge live">r/LGBTeens</span></span><span class="votes">▲ 3 · 2 comments</span></div>
+<h3><a href="https://reddit.com/r/LGBTeens/comments/1xx895f/rant_i_am_socially_trans/" target="_blank" rel="noopener">Figuring it out in public: names, labels, and feeling gender-fluid</a></h3>
+<p>A young person working out their identity in real time: trying out names (Oliver, then Connor), feeling somewhere between nonbinary and gender-fluid, possibly pansexual — “I just change my personality and my feelings every day” — and thinking about next steps.</p>
+<div class="solution"><label>Peer replies · ▲ 3 and ▲ 2</label>
+<p>“Maybe go by a gender-neutral name so you can feel comfortable being both/or none!” And: “You can start small with experimenting — presentation, names, pronouns — to find out more about yourself. Expect trial and error… And don’t feel pressured to label yourself.” Having friends who use your chosen name was the thing that helped most, one reply said.</p></div>
+<p class="threadlink"><a href="https://reddit.com/r/LGBTeens/comments/1xx895f/rant_i_am_socially_trans/" target="_blank" rel="noopener">Read the original thread →</a></p>
+</article>
+
+<article class="card" data-topic="identity friends">
+<div class="card-top"><span><span class="badge">Identity</span> <span class="badge live">r/LGBTeens</span></span><span class="votes">▲ 6 · 3 comments</span></div>
+<h3><a href="https://reddit.com/r/LGBTeens/comments/1xy0gap/i_need_help_discussion/" target="_blank" rel="noopener">“I need help” — a 13-year-old trans teen asking how to make friends at school</a></h3>
+<p>“I’m 13 and I want to make cis male friends at school. I’m already not exactly popular — everyone knows I’m trans and takes the piss out of me, and I get picked on sometimes. I’ve always been socially awkward anyway.” He likes Fortnite and football, and is asking for any advice going. Replies were still few this week — small subs run quiet — but the ask itself will sound familiar to a lot of teens.</p>
+<div class="solution"><label>How peers help in threads like this</label>
+<p>The r/LGBTeens pattern this week: start from shared interests (a game, a team, a club) rather than the whole social scene at once, and lean on the online community while in-person friendships build. The thread is still open at the source if you want to read along.</p></div>
+<p class="threadlink"><a href="https://reddit.com/r/LGBTeens/comments/1xy0gap/i_need_help_discussion/" target="_blank" rel="noopener">Read the original thread →</a></p>
+</article>
+
+<article class="card" data-topic="friends">
+<div class="card-top"><span><span class="badge">Friends &amp; social</span> <span class="badge live">r/teenagers</span></span><span class="votes">▲ 3,760 · 199 comments</span></div>
+<h3><a href="https://reddit.com/r/teenagers/comments/1xzdwra/internet_memes_currently_in_meltdown/" target="_blank" rel="noopener">The lighter side: “Internet memes currently in meltdown”</a></h3>
+<p>Honestly? Most of r/teenagers’ top posts this week were memes and image posts — outfits, screenshots, jokes. This one captured the week’s running gag: GTA 6 finally arriving (in New Zealand first) broke the internet’s favourite format. Top replies: “Even GTA 6 was faster” (▲ 429) and “We got GTA 6 before Half-Life 3” (▲ 248). Not every week online is a crisis — a lot of it is this.</p>
+<p class="threadlink"><a href="https://reddit.com/r/teenagers/comments/1xzdwra/internet_memes_currently_in_meltdown/" target="_blank" rel="noopener">Read the original thread →</a></p>
+</article>
+
 </div>
 
-<section class="card" style="margin-top:18px">
-<h2>Search the “what worked” library</h2>
-<p class="sub">Past situations where a parent reported back on what helped. Try “won’t go to school”, “phone at night”, or “panic”.</p>
-<div class="searchrow"><input id="search" type="search" placeholder="Search sample library… e.g. school refusal, phone, anxiety" aria-label="Search what worked library"/><button id="clearSearch" style="min-height:44px;padding:0 18px;border-radius:999px;border:1px solid var(--line);background:var(--surface);cursor:pointer;font-weight:600">Clear</button></div>
-<div class="library" id="library"></div>
-<div class="empty" id="libEmpty">No sample matches. Try a shorter word like “sleep” or “phone”.</div>
+<div class="trending">
+<h3>Also trending with teens this week</h3>
+<p class="sub">The rest of the week’s top teen-side threads — mostly image and meme posts on r/teenagers, plus the remaining r/ADHD and r/LGBTeens threads.</p>
+<ul class="trend-list">
+<li><a href="https://reddit.com/r/teenagers/comments/1xv5mjo/scrolled_upon_this_gem_today/" target="_blank" rel="noopener">Scrolled upon this gem today</a> <span class="tv">r/teenagers · ▲ 5,541 · 370 comments</span></li>
+<li><a href="https://reddit.com/r/teenagers/comments/1xv6s04/ignore_the_text_this_outfit_looks_so_sickkkk/" target="_blank" rel="noopener">“Ignore the text, this outfit looks so sickkkk” — the historical-fashion debate</a> <span class="tv">r/teenagers · ▲ 5,245 · 778 comments</span></li>
+<li><a href="https://reddit.com/r/teenagers/comments/1xwwrgg/i_have_absolutely_no_words_for_this/" target="_blank" rel="noopener">“I have absolutely no words for this…”</a> <span class="tv">r/teenagers · ▲ 4,269 · 1,199 comments</span></li>
+<li><a href="https://reddit.com/r/teenagers/comments/1xu7iax/common_w_for_team_rocket/" target="_blank" rel="noopener">Common W for Team Rocket</a> <span class="tv">r/teenagers · ▲ 2,836 · 62 comments</span></li>
+<li><a href="https://reddit.com/r/teenagers/comments/1xy50it/actual_question_why_are_there_so_many_examples_of/" target="_blank" rel="noopener">Actual question: why are there so many examples of this?</a> <span class="tv">r/teenagers · ▲ 2,558 · 127 comments</span></li>
+<li><a href="https://reddit.com/r/teenagers/comments/1xwo0zm/that_and_experiencing_misogyny_since_we_entered/" target="_blank" rel="noopener">“That, and experiencing misogyny since we entered kindergarten”</a> <span class="tv">r/teenagers · ▲ 2,327 · 1,724 comments</span></li>
+<li><a href="https://reddit.com/r/teenagers/comments/1xuiqtw/my_future/" target="_blank" rel="noopener">MY FUTURE &gt; - &lt;</a> <span class="tv">r/teenagers · ▲ 2,234 · 175 comments</span></li>
+<li><a href="https://reddit.com/r/teenagers/comments/1xueeco/am_i_handsome_16m/" target="_blank" rel="noopener">Am I handsome? 16M</a> <span class="tv">r/teenagers · ▲ 2,109 · 341 comments</span></li>
+<li><a href="https://reddit.com/r/ADHD/comments/1xxva4h/rant_i_hate_how_the_pharmacy_treats_me_when/" target="_blank" rel="noopener">Rant: I hate how the pharmacy treats me when asking about my prescriptions</a> <span class="tv">r/ADHD · ▲ 738 · 204 comments</span></li>
+<li><a href="https://reddit.com/r/ADHD/comments/1xxy1iz/doing_a_ton_of_cardiovascular_exercise_helped_a/" target="_blank" rel="noopener">Doing a ton of cardiovascular exercise helped a lot</a> <span class="tv">r/ADHD · ▲ 642 · 103 comments</span></li>
+<li><a href="https://reddit.com/r/ADHD/comments/1xygqcf/how_do_you_guys_manage_adhd_unmedicated/" target="_blank" rel="noopener">How do you guys manage ADHD unmedicated?</a> <span class="tv">r/ADHD · ▲ 381 · 439 comments</span></li>
+<li><a href="https://reddit.com/r/ADHD/comments/1xweiey/had_a_final_round_job_interview_was_denied/" target="_blank" rel="noopener">Denied after a final-round interview for “could not follow through”</a> <span class="tv">r/ADHD · ▲ 359 · 53 comments</span></li>
+<li><a href="https://reddit.com/r/ADHD/comments/1xw1ccs/my_body_literally_will_not_move/" target="_blank" rel="noopener">“My body literally will not move” — executive dysfunction, described plainly</a> <span class="tv">r/ADHD · ▲ 356 · 66 comments</span></li>
+<li><a href="https://reddit.com/r/LGBTeens/comments/1xwpq3a/just_with_everything_rant/" target="_blank" rel="noopener">“Just with everything” — tired, and watching everyone else get into relationships</a> <span class="tv">r/LGBTeens · ▲ 6 · 1 comment</span></li>
+<li><a href="https://reddit.com/r/LGBTeens/comments/1xwr3b2/help_on_being_trans_coming_out_discussion/" target="_blank" rel="noopener">Help on being trans? Doubting an identity that still feels true</a> <span class="tv">r/LGBTeens · ▲ 2 · 1 comment</span></li>
+</ul>
+</div>
 </section>
 
 <section class="crisis" aria-labelledby="crisis-h">
@@ -151,51 +339,50 @@ h1 em{font-style:italic;color:var(--teal)}
 <div class="crisis-box"><p style="margin:0 0 8px"><strong>Call or text 988</strong> — Suicide and Crisis Lifeline (US, 24/7)</p><p style="margin:0 0 8px"><strong>Text HOME to 741741</strong> — Crisis Text Line</p><p style="margin:0">If there is immediate danger, call <strong>911</strong>.</p></div>
 </section>
 
-<p class="foot"><strong>About this preview:</strong> Built at your request with clearly-labelled sample data because Reddit’s public RSS and JSON routes are currently blocked and new Data API access may be closed after Oct 31, 2026. Reddit is US-skewed, English-speaking and self-selected — treat every “solution” as one family’s anecdote, not guidance. In the live version every card links to its original thread so you can read the full context and check for updates or deletions. Subreddits referenced: <a href="https://www.reddit.com/r/Parenting/" target="_blank" rel="noopener">r/Parenting</a>, <a href="https://www.reddit.com/r/parentingteenagers/" target="_blank" rel="noopener">r/parentingteenagers</a>, <a href="https://www.reddit.com/r/teenagers/" target="_blank" rel="noopener">r/teenagers</a>.</p>
+<p class="foot"><strong>About this live edition:</strong> Built from the previous week’s top posts and top comments on <a href="https://www.reddit.com/r/Parenting/" target="_blank" rel="noopener">r/Parenting</a>, <a href="https://www.reddit.com/r/parentingteenagers/" target="_blank" rel="noopener">r/parentingteenagers</a>, <a href="https://www.reddit.com/r/teenagers/" target="_blank" rel="noopener">r/teenagers</a>, <a href="https://www.reddit.com/r/LGBTeens/" target="_blank" rel="noopener">r/LGBTeens</a> and <a href="https://www.reddit.com/r/ADHD/" target="_blank" rel="noopener">r/ADHD</a>, fetched November 18, 2026 via RedditAPIs (week of November 11–18, 2026). r/TeenParenting was checked and returned nothing this week. This is a weekly snapshot, not a real-time feed — scores and comment counts are as fetched. Removed or deleted comments and moderator bot notices are excluded, and usernames are not shown. Reddit is US-skewed, English-speaking and self-selected — treat every “solution” as one family’s or one teen’s anecdote, not guidance, and read the full thread for context before acting on anything. This dashboard is read-only: it never posts, votes, or messages anyone.</p>
 </div>
 
 <script>
-const BRIEF=[
- {topic:"school",label:"School",sub:"r/Parenting · Teenager 13–19 flair",title:"15-year-old has started refusing school on Mondays",concern:"Sample concern: mornings have become a battle — stomach aches, tears, then fine by evening. Parent worries about falling behind and whether to push or pause.",solution:"Top-voted sample reply: “We stopped debating at 7am. We made a Sunday-night plan with the school counsellor — late start Mondays for two weeks, one trusted teacher as check-in — and reviewed it together on Fridays. Attendance came back before grades did.”",votes:"▲ 842 · 317 comments"},
- {topic:"screens",label:"Screens & phones",sub:"r/parentingteenagers",title:"Phone in the bedroom all night — how do other families handle it?",concern:"Sample concern: teen says everyone else keeps their phone overnight and that a charging rule means being cut off socially.",solution:"Top-voted sample reply: “Family charging station in the kitchen at 10:30pm — parents’ phones too. First week was rough, sleep visibly improved by week two. The ‘everyone else’ argument faded when it wasn’t teen-only.”",votes:"▲ 1,104 · 489 comments"},
- {topic:"anxiety",label:"Anxiety & mood",sub:"r/Parenting",title:"Daughter panics before tests even when she knows the material",concern:"Sample concern: strong grades, but test mornings bring panic and requests to stay home. Parent unsure what is support vs. avoidance.",solution:"Top-voted sample reply: “Our therapist suggested practising the morning, not the test — same wake-up, breakfast, short walk — on non-test days too, so test day wasn’t the only ‘big’ morning. And we asked the school about a quiet room for the first 10 minutes.”",votes:"▲ 673 · 208 comments"},
- {topic:"sleep",label:"Sleep",sub:"r/parentingteenagers",title:"Teen awake until 2am, impossible to wake at 6:30am",concern:"Sample concern: homework, phone and a late body clock collide with an early school start. Weekends shift even later.",solution:"Top-voted sample reply: “We moved the wake time, not just bedtime — same wake time weekends within an hour, bright light at breakfast, no naps after 4pm. Bedtime followed about 10 days later.”",votes:"▲ 921 · 356 comments"},
- {topic:"friends",label:"Friends & social",sub:"r/Parenting",title:"Son was dropped from his friend group chat overnight",concern:"Sample concern: no fight he can name, just suddenly out. He is checking his phone constantly and dreading lunch.",solution:"Top-voted sample reply: “We didn’t try to fix the group. We helped him invite one kid from it for something low-key outside school. One real connection mattered more than getting back into the chat.”",votes:"▲ 758 · 274 comments"},
- {topic:"independence",label:"Independence",sub:"r/parentingteenagers",title:"First solo trips — driving practice vs. rideshares at 16",concern:"Sample concern: parents disagree on readiness; teen feels trusted at school but not at home.",solution:"Top-voted sample reply: “We wrote the ladder down together: familiar daytime routes → one new route → night driving with a parent → solo. Each step had a clear ‘done when’ so it wasn’t endless ‘not yet’.”",votes:"▲ 512 · 189 comments"},
- {topic:"screens",label:"Screens & phones",sub:"r/teenagers (teen view)",title:"Teens on screen-time rules: what they say actually works",concern:"Sample teen-side summary: teens are far more accepting of rules they helped set and that apply to parents too, and resent surprise phone checks most.",solution:"Most-upvoted teen sample comment: “If my parents check my phone randomly I just hide more. If we agreed the rule in advance I actually follow it.”",votes:"▲ 2,310 · 904 comments"},
- {topic:"school",label:"School",sub:"r/Parenting",title:"Homework takes 4 hours — is it the work or the phone?",concern:"Sample concern: teen sits at desk all evening but output is small; parent doesn’t want nightly policing.",solution:"Top-voted sample reply: “25-minute sprints with the phone in another room, timer visible, breaks are real breaks. We tracked finished tasks, not hours sat — that changed the whole conversation.”",votes:"▲ 689 · 231 comments"},
- {topic:"anxiety",label:"Anxiety & mood",sub:"r/parentingteenagers",title:"How do you know when ‘teen mood’ needs professional help?",concern:"Sample concern: withdrawn for weeks, dropped a favourite activity, sleep and appetite changed. Parent hesitates to overreact or underreact.",solution:"Top-voted sample reply: “Our paediatrician said watch function, not just mood: school, friends, eating, sleeping, the things they used to enjoy. When several slip for 2+ weeks, book the appointment — you don’t need certainty first.” Note: sample only, not medical advice.",votes:"▲ 1,467 · 512 comments"}
+var cards = Array.prototype.slice.call(document.querySelectorAll('.card'));
+var sections = [
+  { el: document.getElementById('parentsSection'), name: 'parents' },
+  { el: document.getElementById('teensSection'), name: 'teens' }
 ];
-const LIB=[
- {q:"My 15-year-old won't go to school",a:"Counsellor-backed late-start plan + Friday review. Parent reported attendance back in 3 weeks.",tag:"School",votes:"▲ 842"},
- {q:"Phone at night — teen won't give it up",a:"Family charging station (parents included) at 10:30pm. Sleep improved by week two.",tag:"Screens",votes:"▲ 1,104"},
- {q:"Panic before tests",a:"Rehearsing the test-day morning routine on ordinary days + quiet-room arrangement at school.",tag:"Anxiety",votes:"▲ 673"},
- {q:"Awake until 2am, can't wake up",a:"Fixed wake time 7 days a week, morning light, no late naps. Bedtime shifted within 10 days.",tag:"Sleep",votes:"▲ 921"},
- {q:"Dropped from the group chat",a:"One low-key invite outside school instead of fighting back into the chat.",tag:"Friends",votes:"▲ 758"},
- {q:"Homework takes all evening",a:"25-minute phone-free sprints, tracking finished tasks not hours.",tag:"School",votes:"▲ 689"},
- {q:"Won't talk after school",a:"Car rides and walks instead of face-to-face questions — side-by-side talk worked.",tag:"Friends",votes:"▲ 604"},
- {q:"Anxiety — when to get help?",a:"Watch function across school, friends, sleep, appetite for 2+ weeks, then book via paediatrician.",tag:"Anxiety",votes:"▲ 1,467"}
-];
-const briefList=document.getElementById('briefList');
-function renderBrief(f){
-  const items=BRIEF.filter(b=>f==='all'||b.topic===f);
-  briefList.innerHTML=items.map(b=>`<article class="brief"><div class="brief-top"><span><span class="badge">${b.label}</span> <span class="badge sample">Sample</span> <span style="font-size:12px;color:var(--muted)">${b.sub}</span></span><span class="votes">${b.votes}</span></div><h3>${b.title}</h3><p>${b.concern}</p><div class="solution"><label>Most-upvoted solution</label><p>${b.solution}</p></div><p style="margin-top:10px;font-size:13px"><span style="color:var(--muted)">Live version: link to original thread here · Sample preview has no thread link</span></p></article>`).join('');
-  document.getElementById('briefEmpty').style.display=items.length?'none':'block';
+var activeFilter = 'all';
+var query = '';
+function applyFilters(){
+  var anyVisible = false;
+  cards.forEach(function(card){
+    var topicMatch = activeFilter === 'all' || (' ' + card.getAttribute('data-topic') + ' ').indexOf(' ' + activeFilter + ' ') !== -1;
+    var textMatch = !query || card.textContent.toLowerCase().indexOf(query) !== -1;
+    var show = topicMatch && textMatch;
+    card.style.display = show ? '' : 'none';
+    if (show) anyVisible = true;
+  });
+  sections.forEach(function(s){
+    var visible = s.el.querySelectorAll('.card:not([style*="none"])').length;
+    var trend = s.el.querySelector('.trending');
+    if (trend) trend.style.display = (activeFilter === 'all' && !query) ? '' : 'none';
+    s.el.style.display = visible ? '' : 'none';
+  });
+  document.getElementById('noResults').style.display = anyVisible ? 'none' : 'block';
 }
-function renderLib(q){
-  const query=(q||'').toLowerCase().trim();
-  const items=LIB.filter(x=>!query|| (x.q+' '+x.a+' '+x.tag).toLowerCase().includes(query));
-  document.getElementById('library').innerHTML=items.map(x=>`<div class="lib"><span class="badge sample">Sample</span> <span class="badge">${x.tag}</span><h4 style="margin-top:8px">${x.q}</h4><p><strong style="color:var(--ink)">What worked:</strong> ${x.a}</p><footer><span>${x.votes}</span><span>Community experience only</span></footer></div>`).join('');
-  document.getElementById('libEmpty').style.display=items.length?'none':'block';
-}
-document.getElementById('filters').addEventListener('click',e=>{
-  const btn=e.target.closest('button'); if(!btn) return;
-  document.querySelectorAll('#filters button').forEach(b=>b.classList.remove('active')); btn.classList.add('active');
-  renderBrief(btn.dataset.filter);
+document.getElementById('filters').addEventListener('click', function(e){
+  var btn = e.target.closest('button'); if (!btn) return;
+  document.querySelectorAll('#filters button').forEach(function(b){ b.classList.remove('active'); });
+  btn.classList.add('active');
+  activeFilter = btn.getAttribute('data-filter');
+  applyFilters();
 });
-document.getElementById('search').addEventListener('input',e=>renderLib(e.target.value));
-document.getElementById('clearSearch').addEventListener('click',()=>{document.getElementById('search').value='';renderLib('');});
-renderBrief('all'); renderLib('');
+document.getElementById('search').addEventListener('input', function(e){
+  query = e.target.value.toLowerCase().trim();
+  applyFilters();
+});
+document.getElementById('clearSearch').addEventListener('click', function(){
+  document.getElementById('search').value = '';
+  query = '';
+  applyFilters();
+});
 </script>
 </body>
 </html>
